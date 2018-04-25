@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.00",
+  "parameters": {
+    "subnets": {
+      "type": "array"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "vnetResourceGroup": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "subnets": {
+      "copy": [
+        {
+          "name": "subnetLoop",
+          "count": "[length(parameters('subnets'))]",
+          "input": {
+            "name": "[parameters('subnets')[copyIndex('subnetLoop')].name]",
+            "properties": {
+              "addressprefix": "[parameters('subnets')[copyIndex('subnetLoop')].addressPrefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId(parameters('subscriptionId'),parameters('vnetResourceGroup'),'Microsoft.Network/networkSecurityGroups/',parameters('subnets')[copyIndex('subnetLoop')].nsg)]"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "subnets": {
+      "type": "array",
+      "value": "[variables('subnets').subnetLoop]"
+    }
+  }
+}

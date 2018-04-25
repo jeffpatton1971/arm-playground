@@ -1,0 +1,149 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.00",
+  "parameters": {
+    "subnets": {
+      "type": "array"
+    }
+  },
+  "variables": {
+    "networkSecurityGroup": {
+      "copy": [
+        {
+          "name": "nsgLoop",
+          "count": "[length(parameters('subnets'))]",
+          "input": {
+            "name": "[parameters('subnets')[copyIndex('nsgLoop')].nsg]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-05-01-preview",
+            "properties": {
+              "securityRules": [
+                {
+                  "name": "Allow_LOCAL_SUBNET_INBOUND",
+                  "properties": {
+                    "description": "Allows intra-subnet communication",
+                    "protocol": "*",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 110,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_AZURE_LB_INBOUND",
+                  "properties": {
+                    "description": "Allows inbound traffic from Azure Load Balancer",
+                    "protocol": "*",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "AzureLoadBalancer",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 111,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                  "properties": {
+                    "description": "Allows RDP inbound from local RBAST subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "3389",
+                    "sourceAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 112,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                  "properties": {
+                    "description": "Allows SSH inbound from local RBAST subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "22",
+                    "sourceAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 113,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                  "properties": {
+                    "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "5986",
+                    "sourceAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 114,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                  "properties": {
+                    "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "4421",
+                    "sourceAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('subnets')[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 115,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Deny_ALL_INBOUND_UDP",
+                  "properties": {
+                    "description": "Deny all inbound UDP",
+                    "protocol": "Udp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Deny",
+                    "priority": 4000,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Deny_ALL_INBOUND_TCP",
+                  "properties": {
+                    "description": "Deny all inbound TCP",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Deny",
+                    "priority": 4001,
+                    "direction": "Inbound"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "networkSecurityGroup": {
+      "type": "array",
+      "value": "[variables('networkSecurityGroup').nsgLoop]"
+    }
+  }
+}

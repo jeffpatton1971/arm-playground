@@ -1,0 +1,94 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "type": "object",
+      "defaultValue": {}
+    }
+  },
+  "variables": {
+    "environment": {
+      "name": "[parameters('environment').name]",
+      "account": "[parameters('environment').account]",
+      "csp": "[parameters('environment').csp]",
+      "ea": "[parameters('environment').ea]",
+      "device": "[parameters('environment').device]",
+      "ticket": "[parameters('environment').ticket]",
+      "region": "[parameters('environment').region]",
+      "subscriptionId": "[parameters('environment').subscriptionId]",
+      "tenantId": "[parameters('environment').tenantId]"
+    },
+    "vnetCount": "[length(parameters('environment').virtualNetwork)]"
+  },
+  "resources": [
+    {
+      "name": "[concat('BuildNsg-', copyIndex())]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "copy": {
+        "count": "[length(parameters('environment').virtualNetwork)]",
+        "name": "vnetLoop"
+      },
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://armreference.blob.core.windows.net/playground/nsg-builder.json",
+          "contentVersion": "2017.09.01.00"
+        },
+        "parameters": {
+          "subnets": {
+            "value": "[parameters('environment').virtualNetwork[copyIndex('vnetLoop')].subnets]"
+          }
+        }
+      }
+    },
+    {
+      "name": "[concat('BuildVirtualNetwork-', copyIndex())]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "copy": {
+        "count": "[length(parameters('environment').virtualNetwork)]",
+        "name": "vnetLoop"
+      },
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://armreference.blob.core.windows.net/playground/vnet-builder.json",
+          "contentVersion": "2017.09.01.00"
+        },
+        "parameters": {
+          "virtualNetwork": {
+            "value": "[parameters('environment').virtualNetwork[copyIndex('vnetLoop')]]"
+          },
+          "subnets": {
+            "value": "[parameters('environment').virtualNetwork[copyIndex('vnetLoop')].subnets]"
+          },
+          "subscriptionId": {
+            "value": "[parameters('environment').subscriptionId]"
+          },
+          "deploymentName": {
+            "value": "[concat('BuildVirtualNetwork-', copyIndex())]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "armTemplate": {
+      "type": "object",
+      "value": {
+        "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+        "contentVersion": "1.0.0.0",
+        "parameters": {
+        },
+        "variables": "[variables('environment')]",
+        "resources": "[createArray(reference('BuildNsg-0').outputs.networkSecurityGroup.value,reference('BuildNsg-1').outputs.networkSecurityGroup.value,reference('BuildVirtualnetwork-0').outputs.virtualnetwork.value,reference('BuildVirtualnetwork-1').outputs.virtualnetwork.value)]",
+        "outputs": {
+        }
+      }
+    }
+  }
+}

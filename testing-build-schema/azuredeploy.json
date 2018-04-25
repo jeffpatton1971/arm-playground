@@ -1,0 +1,372 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "type": "object",
+      "defaultValue": {}
+    }
+  },
+  "variables": {
+    "OS": {
+      "Windows Server 2012 R2": {
+        "imagePublisher": "MicrosoftWindowsServer",
+        "imageOffer": "WindowsServer",
+        "imageSKU": "2012-R2-Datacenter",
+        "version": "latest",
+        "type": "windows"
+      },
+      "Windows Server 2016 DataCenter": {
+        "imagePublisher": "MicrosoftWindowsServer",
+        "imageOffer": "WindowsServer",
+        "imageSKU": "2016-Datacenter",
+        "version": "latest",
+        "type": "windows"
+      }
+    },
+    "regions": {
+      "South Central US": {
+        "location": "southcentralus",
+        "abbreviation": "scu",
+        "timezone": "Central Standard Time"
+      },
+      "East US": {
+        "location": "eastus",
+        "abbreviation": "eus",
+        "timezone": "Eastern Standard Time"
+      },
+      "East US2": {
+        "location": "eastus2",
+        "abbreviation": "eus",
+        "timezone": "Eastern Standard Time"
+      },
+      "West US": {
+        "location": "westus",
+        "abbreviation": "wus",
+        "timezone": "Pacific Standard Time"
+      },
+      "West US2": {
+        "location": "westus2",
+        "abbreviation": "wus",
+        "timezone": "Pacific Standard Time"
+      }
+    },
+    "environment": {
+      "name": "[parameters('environment').name]",
+      "account": "[parameters('environment').account]",
+      "csp": "[parameters('environment').csp]",
+      "ea": "[parameters('environment').ea]",
+      "device": "[parameters('environment').device]",
+      "ticket": "[parameters('environment').ticket]",
+      "region": "[parameters('environment').region]",
+      "subscriptionId": "[parameters('environment').subscriptionId]",
+      "tenantId": "[parameters('environment').tenantId]"
+    },
+    "networkSecurityGroup": {
+      "copy": [
+        {
+          "name": "nsgLoop",
+          "count": "[length(parameters('environment').virtualNetwork[0].subnets)]",
+          "input": {
+            "name": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].nsg]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2015-05-01-preview",
+            "properties": {
+              "securityRules": [
+                {
+                  "name": "Allow_LOCAL_SUBNET_INBOUND",
+                  "properties": {
+                    "description": "Allows intra-subnet communication",
+                    "protocol": "*",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 110,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_AZURE_LB_INBOUND",
+                  "properties": {
+                    "description": "Allows inbound traffic from Azure Load Balancer",
+                    "protocol": "*",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "AzureLoadBalancer",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 111,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                  "properties": {
+                    "description": "Allows RDP inbound from local RBAST subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "3389",
+                    "sourceAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 112,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                  "properties": {
+                    "description": "Allows SSH inbound from local RBAST subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "22",
+                    "sourceAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 113,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                  "properties": {
+                    "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "5986",
+                    "sourceAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 114,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                  "properties": {
+                    "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "4421",
+                    "sourceAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].bastion]",
+                    "destinationAddressPrefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('nsgLoop')].addressPrefix]",
+                    "access": "Allow",
+                    "priority": 115,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Deny_ALL_INBOUND_UDP",
+                  "properties": {
+                    "description": "Deny all inbound UDP",
+                    "protocol": "Udp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Deny",
+                    "priority": 4000,
+                    "direction": "Inbound"
+                  }
+                },
+                {
+                  "name": "Deny_ALL_INBOUND_TCP",
+                  "properties": {
+                    "description": "Deny all inbound TCP",
+                    "protocol": "Tcp",
+                    "sourcePortRange": "*",
+                    "destinationPortRange": "*",
+                    "sourceAddressPrefix": "*",
+                    "destinationAddressPrefix": "*",
+                    "access": "Deny",
+                    "priority": 4001,
+                    "direction": "Inbound"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "virtualNetwork": {
+      "name": "[parameters('environment').virtualNetwork[0].name]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2017-09-01",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('environment').virtualNetwork[0].addressPrefix]"
+          ]
+        },
+        "dhcpOptions": {
+          "dnsServers": null
+        }
+      },
+      "subnets": {
+        "copy": [
+          {
+            "name": "subnetLoop",
+            "count": "[length(parameters('environment').virtualNetwork[0].subnets)]",
+            "input": {
+              "name": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('subnetLoop')].name]",
+              "properties": {
+                "addressprefix": "[parameters('environment').virtualNetwork[0].subnets[copyIndex('subnetLoop')].addressPrefix]",
+                "networkSecurityGroup": {
+                  "id": "[resourceId(parameters('environment').subscriptionId,parameters('environment').virtualNetwork[0].ResourceGroup,'Microsoft.Network/networkSecurityGroups/',parameters('environment').virtualNetwork[0].subnets[copyIndex('subnetLoop')].nsg)]"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "availabilitySet": {
+      "copy": [
+        {
+          "name": "avLoop",
+          "count": "[length(parameters('environment').virtualMachines)]",
+          "input": {
+            "apiVersion": "2017-03-30",
+            "name": "[parameters('environment').virtualMachines[copyIndex('avLoop')].availabilitySet]",
+            "type": "Microsoft.Compute/availabilitySets",
+            "dependsOn": [
+            ],
+            "location": "[resourceGroup().location]",
+            "tags": "[json('null')]",
+            "sku": {
+              "name": "Aligned"
+            },
+            "properties": {
+              "platformUpdateDomainCount": 5,
+              "platformFaultDomainCount": 3
+            }
+          }
+        }
+      ]
+    },
+    "networkInterface": {
+      "copy": [
+        {
+          "name": "nicLoop",
+          "count": "[length(parameters('environment').virtualMachines)]",
+          "input": {
+            "apiVersion": "2017-10-01",
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "[concat(parameters('environment').virtualMachines[copyIndex('nicLoop')].name,'-nic')]",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+              "[parameters('environment').virtualMachines[copyIndex('nicLoop')].availabilitySet]"
+            ],
+            "properties": {
+              "dnsSettings": {},
+              "enableAcceleratedNetworking": false,
+              "ipConfigurations": [
+                {
+                  "name": "[concat(parameters('environment').virtualMachines[copyIndex('nicLoop')].name,'-ipc')]",
+                  "properties": {
+                    "privateIPAllocationMethod": "Dynamic",
+                    "privateIPAddressVersion": "IPv4",
+                    "subnet": {
+                      "id": "[concat(resourceId(parameters('environment').subscriptionId,parameters('environment').virtualNetwork[0].ResourceGroup,'Microsoft.Network/virtualNetworks',parameters('environment').virtualNetwork[0].name),'/subnets/',parameters('environment').virtualMachines[copyIndex('nicLoop')].subnet)]"
+                    }
+                  }
+                }
+              ]
+            },
+            "tags": "[json('null')]"
+          }
+        }
+      ]
+    },
+    "virtualMachine": {
+      "copy": [
+        {
+          "name": "vmLoop",
+          "count": "[length(parameters('environment').virtualMachines)]",
+          "input": {
+            "apiVersion": "2017-03-30",
+            "location": "[resourceGroup().location]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "name": "[concat(parameters('environment').virtualMachines[copyIndex('vmLoop')].name)]",
+            "dependsOn": [
+              "[concat(parameters('environment').virtualMachines[copyIndex('vmLoop')].name,'-nic')]"
+            ],
+            "properties": {
+              "availabilitySet": {
+                "id": "[resourceId(parameters('environment').subscriptionId,parameters('environment').virtualMachines[copyIndex('vmLoop')].ResourceGroup,'Microsoft.Compute/availabilitySets',parameters('environment').virtualMachines[copyIndex('vmLoop')].availabilitySet)]"
+              },
+              "hardwareProfile": {
+                "vmSize": "[parameters('environment').virtualMachines[copyIndex('vmLoop')].vmSize]"
+              },
+              "storageProfile": {
+                "imageReference": {
+                  "publisher": "[concat(variables('OS')[parameters('environment').virtualMachines[copyIndex('vmLoop')].operatingSystem].imagePublisher)]",
+                  "offer": "[concat(variables('OS')[parameters('environment').virtualMachines[copyIndex('vmLoop')].operatingSystem].imageOffer)]",
+                  "sku": "[concat(variables('OS')[parameters('environment').virtualMachines[copyIndex('vmLoop')].operatingSystem].imageSKU)]",
+                  "version": "[concat(variables('OS')[parameters('environment').virtualMachines[copyIndex('vmLoop')].operatingSystem].version)]"
+                },
+                "osDisk": {
+                  "name": "[concat(parameters('environment').virtualMachines[copyIndex('vmLoop')].name,'.vhd')]",
+                  "caching": "ReadOnly",
+                  "createOption": "FromImage"
+                },
+                "dataDisks": [
+                ]
+              },
+              "osProfile": {
+                "computerName": "[parameters('environment').virtualMachines[copyIndex('vmLoop')].name]",
+                "adminUsername": "rack-adm",
+                "adminPassword": "P@ssword12345",
+                "windowsConfiguration": {
+                  "provisionVMAgent": true,
+                  "timeZone": "[variables('regions')[parameters('environment').region].timezone]"
+                }
+              },
+              "networkProfile": {
+                "networkInterfaces": [
+                  {
+                    "id": "[resourceId(parameters('environment').subscriptionId,parameters('environment').virtualMachines[copyIndex('vmLoop')].ResourceGroup,'Microsoft.Network/networkInterfaces',concat(parameters('environment').virtualMachines[copyIndex('vmLoop')].name,'-nic'))]",
+                    "primary": true
+                  }
+                ]
+              }
+            },
+            "tags": "[json('null')]"
+          }
+        }
+      ]
+    }
+  },
+  "resources": [],
+  "outputs": {
+    "environment": {
+      "type": "object",
+      "value": "[variables('environment')]"
+    },
+    "networkSecurityGroup": {
+      "type": "array",
+      "value": "[variables('networkSecurityGroup').nsgLoop]"
+    },
+    "availabilitySet": {
+      "type": "array",
+      "value": "[variables('availabilitySet').avLoop]"
+    },
+    "networkInterface": {
+      "type": "array",
+      "value": "[variables('networkInterface').nicLoop]"
+    },
+    "virtualNetwork": {
+      "type": "object",
+      "value": "[variables('virtualNetwork')]"
+    },
+    "virtualMachine": {
+      "type": "array",
+      "value": "[variables('virtualMachine').vmLoop]"
+    }
+  }
+}

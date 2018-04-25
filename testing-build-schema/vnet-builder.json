@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "2017.09.01.00",
+  "parameters": {
+    "virtualNetwork": {
+      "type": "object"
+    },
+    "subnets": {
+      "type": "array"
+    },
+    "subscriptionId": {
+      "type": "string"
+    },
+    "deploymentName": {
+      "type": "string"
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('deploymentName'),'-BuildSubnets')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "https://armreference.blob.core.windows.net/playground/subnet-builder.json",
+          "contentVersion": "2017.09.01.00"
+        },
+        "parameters": {
+          "subnets": {
+            "value": "[parameters('subnets')]"
+          },
+          "subscriptionId": {
+            "value": "[parameters('subscriptionId')]"
+          },
+          "vnetResourceGroup": {
+            "value": "[parameters('virtualNetwork').ResourceGroup]"
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "virtualnetwork": {
+      "type": "object",
+      "value": {
+        "name": "[parameters('virtualNetwork').name]",
+        "type": "Microsoft.Network/virtualNetworks",
+        "location": "[resourceGroup().location]",
+        "apiVersion": "2017-09-01",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('virtualNetwork').addressPrefix]"
+            ]
+          },
+          "dhcpOptions": {
+            "dnsServers": null
+          }
+        },
+        "subnets": "[reference(concat(parameters('deploymentName'),'-BuildSubnets')).outputs.subnets.value]"
+      }
+    }
+  }
+}

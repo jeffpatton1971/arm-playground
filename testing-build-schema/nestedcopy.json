@@ -1,0 +1,72 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "build": {
+      "type": "object",
+      "defaultValue": {}
+    }
+  },
+  "variables": {
+    "environment": {
+      "name": "[parameters('build').name]",
+      "account": "[parameters('build').account]",
+      "csp": "[parameters('build').csp]",
+      "ea": "[parameters('build').ea]",
+      "device": "[parameters('build').device]",
+      "ticket": "[parameters('build').ticket]",
+      "region": "[parameters('build').region]",
+      "subscriptionId": "[parameters('build').subscriptionId]",
+      "tenantId": "[parameters('build').tenantId]"
+    },
+    "virtualNetwork": {
+      "copy": [
+        {
+          "name": "vnetLoop",
+          "count": "[length(parameters('build').virtualNetwork)]",
+          "input": {
+            "name": "[parameters('build').virtualNetwork[copyIndex('vnetLoop')].name]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "location": "[resourceGroup().location]",
+            "apiVersion": "2017-09-01",
+            "properties": {
+              "addressSpace": {
+                "addressPrefixes": [
+                  "[parameters('build').virtualNetwork[copyIndex('vnetLoop')].addressPrefix]"
+                ]
+              },
+              "dhcpOptions": {
+                "dnsServers": null
+              }
+            },
+            "subnets": {
+              "copy": [
+                {
+                  "name": "subnetLoop",
+                  "count": "[length(parameters('build').virtualNetwork[copyIndex('vnetLoop')].subnets)]",
+                  "input": {
+                    "name": "[parameters('build').virtualNetwork[copyIndex('vnetLoop')].subnets[copyIndex('subnetLoop')].name]",
+                    "properties": {
+                      "addressprefix": "[parameters('build').virtualNetwork[copyIndex('vnetLoop')].subnets[copyIndex('subnetLoop')].addressPrefix]"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "resources": [],
+  "outputs": {
+    "environment": {
+      "type": "object",
+      "value": "[variables('environment')]"
+    },
+    "virtualNetwork": {
+      "type": "object",
+      "value": "[variables('virtualNetwork')]"
+    }
+  }
+}

@@ -1,0 +1,352 @@
+{
+  "$schema": "https://armreference.blob.core.windows.net/schema/schema.json#",
+  "ConfigurationItems": {
+    "Environment": [
+      {
+        "name": "Production",
+        "account": "",
+        "csp": false,
+        "ea": false,
+        "device": "",
+        "ticket": "",
+        "region": "East US",
+        "subscriptionId": "f2567e29-dd77-4151-9b7b-4127e1f902c7",
+        "tenantId": "996a48a4-2989-4fd3-a56a-44e9d6ca62b3",
+        "virtualNetwork": [
+          {
+            "name": "eus-vnet01",
+            "ResourceGroup": "eus-vnet",
+            "addressPrefix": "10.100.0.0/21",
+            "subnets": [
+              {
+                "name": "eus-vnet01-dmz",
+                "addressPrefix": "10.100.0.0/27",
+                "nsg": "eus-vnet01-dmz-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "eus-vnet01-app",
+                "addressPrefix": "10.100.0.32/27",
+                "nsg": "eus-vnet01-app-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "eus-vnet01-ins",
+                "addressPrefix": "10.100.0.64/27",
+                "nsg": "eus-vnet01-ins-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "eus-vnet01-ad",
+                "addressPrefix": "10.100.0.96/27",
+                "nsg": "eus-vnet01-ad-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "eus-vnet01-bas",
+                "addressPrefix": "10.100.0.128/27",
+                "nsg": "eus-vnet01-bas-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "eus-vnet01-agw",
+                "addressPrefix": "10.100.0.160/27",
+                "nsg": "eus-vnet01-agw-nsg",
+                "bastion": "10.100.0.128/27"
+              },
+              {
+                "name": "GatewaySubnet",
+                "addressPrefix": "10.100.0.192/27",
+                "nsg": "GatewaySubnet-nsg",
+                "bastion": "10.100.0.128/27"
+              }
+            ]
+          },
+          {
+            "name": "eus-vnet02",
+            "ResourceGroup": "eus-vnet",
+            "addressPrefix": "10.101.0.0/21",
+            "subnets": [
+              {
+                "name": "eus-vnet02-dmz",
+                "addressPrefix": "10.101.0.0/27",
+                "nsg": "eus-vnet02-dmz-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "eus-vnet02-app",
+                "addressPrefix": "10.101.0.32/27",
+                "nsg": "eus-vnet02-app-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "eus-vnet02-ins",
+                "addressPrefix": "10.101.0.64/27",
+                "nsg": "eus-vnet02-ins-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "eus-vnet02-ad",
+                "addressPrefix": "10.101.0.96/27",
+                "nsg": "eus-vnet02-ad-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "eus-vnet02-bas",
+                "addressPrefix": "10.101.0.128/27",
+                "nsg": "eus-vnet02-bas-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "eus-vnet02-agw",
+                "addressPrefix": "10.101.0.160/27",
+                "nsg": "eus-vnet02-agw-nsg",
+                "bastion": "10.101.0.128/27"
+              },
+              {
+                "name": "GatewaySubnet",
+                "addressPrefix": "10.101.0.192/27",
+                "nsg": "GatewaySubnet-nsg",
+                "bastion": "10.101.0.128/27"
+              }
+            ]
+          }
+        ],
+        "virtualMachines": [
+          {
+            "name": "x-win-jump-01",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "A1_v2",
+            "availabilitySet": "x-win-jump-avset",
+            "ResourceGroup": "eus-jump",
+            "subnet": "eus-vnet01-bas",
+            "dataDisks": []
+          },
+          {
+            "name": "x-win-jump-02",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "A1_v2",
+            "availabilitySet": "x-win-jump-avset",
+            "ResourceGroup": "eus-jump",
+            "subnet": "eus-vnet01-bas",
+            "dataDisks": []
+          },
+          {
+            "name": "x-win-jump-03",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "A1_v2",
+            "availabilitySet": "x-win-jump-avset",
+            "ResourceGroup": "eus-jump",
+            "subnet": "eus-vnet01-bas",
+            "dataDisks": []
+          },
+          {
+            "name": "x-win-ad-01",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "DS1_v2",
+            "availabilitySet": "x-win-ad-avset",
+            "ResourceGroup": "eus-ad",
+            "subnet": "eus-vnet01-ad",
+            "dataDisks": [
+              {
+                "name": "x-win-ad-01-logs.vhd",
+                "lun": 0,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              },
+              {
+                "name": "x-win-ad-01-syslog.vhd",
+                "lun": 1,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              }
+            ]
+          },
+          {
+            "name": "x-win-ad-02",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "DS1_v2",
+            "availabilitySet": "x-win-ad-avset",
+            "ResourceGroup": "eus-ad",
+            "subnet": "eus-vnet01-ad",
+            "dataDisks": [
+              {
+                "name": "x-win-ad-02-logs.vhd",
+                "lun": 0,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              },
+              {
+                "name": "x-win-ad-02-syslog.vhd",
+                "lun": 1,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              }
+            ]
+          }
+        ],
+        "AzureSQL": [
+          {
+            "serverName": "sql-01",
+            "ResourceGroup": "eus-sql",
+            "elasticPool": [
+              {
+                "name": "sql-01-ep",
+                "pool": {
+                  "dataSize": 1200,
+                  "dtu": 1
+                }
+              }
+            ],
+            "database": [
+              {
+                "name": "db1",
+                "elasticPoolName": "sql-01-ep",
+                "GeoReplication": {
+                  "enabled": true,
+                  "region": "WestUS"
+                }
+              },
+              {
+                "name": "db2",
+                "elasticPoolName": "sql-01-ep",
+                "GeoReplication": {
+                  "enabled": true,
+                  "region": "WestUS"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Development",
+        "account": "",
+        "csp": false,
+        "ea": false,
+        "device": "",
+        "ticket": "",
+        "region": "West US",
+        "subscriptionId": "330eefab-1a83-4e7a-a4c8-bee08840dd50",
+        "tenantId": "996a48a4-2989-4fd3-a56a-44e9d6ca62b3",
+        "virtualNetwork": [
+          {
+            "name": "wus-vnet01",
+            "ResourceGroup": "wus-vnet",
+            "addressPrefix": "10.102.0.0/21",
+            "subnets": [
+              {
+                "name": "wus-vnet01-dmz",
+                "addressPrefix": "10.102.0.0/27",
+                "nsg": "wus-vnet01-dmz-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "wus-vnet01-app",
+                "addressPrefix": "10.102.0.32/27",
+                "nsg": "wus-vnet01-app-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "wus-vnet01-ins",
+                "addressPrefix": "10.102.0.64/27",
+                "nsg": "wus-vnet01-ins-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "wus-vnet01-ad",
+                "addressPrefix": "10.102.0.96/27",
+                "nsg": "wus-vnet01-ad-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "wus-vnet01-bas",
+                "addressPrefix": "10.102.0.128/27",
+                "nsg": "wus-vnet01-bas-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "wus-vnet01-agw",
+                "addressPrefix": "10.102.0.160/27",
+                "nsg": "wus-vnet01-agw-nsg",
+                "bastion": "10.102.0.128/27"
+              },
+              {
+                "name": "GatewaySubnet",
+                "addressPrefix": "10.102.0.192/27",
+                "nsg": "GatewaySubnet-nsg",
+                "bastion": "10.102.0.128/27"
+              }
+            ]
+          }
+        ],
+        "virtualMachines": [
+          {
+            "name": "x-win-jump-04",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "A1_v2",
+            "availabilitySet": "x-win-jump-avset",
+            "ResourceGroup": "wus-jump",
+            "subnet": "wus-vnet01-bas",
+            "dataDisks": []
+          },
+          {
+            "name": "x-win-ad-03",
+            "operatingSystem": "Windows Server 2016",
+            "vmSize": "DS1_v2",
+            "availabilitySet": "x-win-ad-avset",
+            "ResourceGroup": "wus-ad",
+            "subnet": "wus-vnet01-ad",
+            "dataDisks": [
+              {
+                "name": "x-win-ad-03-logs.vhd",
+                "lun": 0,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              },
+              {
+                "name": "x-win-ad-03-syslog.vhd",
+                "lun": 1,
+                "sizeInGB": 32,
+                "sku": "Premium_LRS"
+              }
+            ]
+          }
+        ],
+        "AzureSQL": [
+          {
+            "serverName": "sql-02",
+            "ResourceGroup": "wus-sql",
+            "elasticPool": [
+              {
+                "name": "sql-02-ep",
+                "pool": {
+                  "dataSize": 1200,
+                  "dtu": 1
+                }
+              }
+            ],
+            "database": [
+              {
+                "name": "db1",
+                "elasticPoolName": "sql-02-ep",
+                "GeoReplication": {
+                  "enabled": true,
+                  "region": "EastUS"
+                }
+              },
+              {
+                "name": "db2",
+                "elasticPoolName": "sql-02-ep",
+                "GeoReplication": {
+                  "enabled": true,
+                  "region": "EastUS"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

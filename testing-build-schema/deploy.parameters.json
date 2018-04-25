@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "subnets": {
+      "value": [
+        {
+          "name": "eus-vnet01-dmz",
+          "addressPrefix": "10.100.0.0/27",
+          "nsg": "eus-vnet01-dmz-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "eus-vnet01-app",
+          "addressPrefix": "10.100.0.32/27",
+          "nsg": "eus-vnet01-app-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "eus-vnet01-ins",
+          "addressPrefix": "10.100.0.64/27",
+          "nsg": "eus-vnet01-ins-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "eus-vnet01-ad",
+          "addressPrefix": "10.100.0.96/27",
+          "nsg": "eus-vnet01-ad-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "eus-vnet01-bas",
+          "addressPrefix": "10.100.0.128/27",
+          "nsg": "eus-vnet01-bas-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "eus-vnet01-agw",
+          "addressPrefix": "10.100.0.160/27",
+          "nsg": "eus-vnet01-agw-nsg",
+          "bastion": "10.100.0.128/27"
+        },
+        {
+          "name": "GatewaySubnet",
+          "addressPrefix": "10.100.0.192/27",
+          "nsg": "GatewaySubnet-nsg",
+          "bastion": "10.100.0.128/27"
+        }
+      ]
+    }
+  }
+}
