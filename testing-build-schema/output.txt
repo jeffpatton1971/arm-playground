@@ -1,0 +1,2150 @@
+# jeff0372@FSTNQL1 | 21:53:25 | 04-25-2018 | [77.47GB] D:\CODE\projects\arm-playground\testing-build-schema $  [master =]
+New-AzureRmResourceGroupDeployment -Name testing -ResourceGroupName TESTING-RG -TemplateFile .\deploy.json -TemplateParameterFile .\azuredeploy.parameters.json -Verbose
+VERBOSE: Performing the operation "Creating Deployment" on target "TESTING-RG".
+VERBOSE: 9:53:39 PM - Template is valid.
+VERBOSE: 9:53:41 PM - Create template deployment 'testing'
+VERBOSE: 9:53:41 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:53:46 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:53:53 PM - Resource Microsoft.Resources/deployments 'BuildNsg-1' provisioning status is running
+VERBOSE: 9:53:53 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-0' provisioning status is running
+VERBOSE: 9:53:53 PM - Resource Microsoft.Resources/deployments 'BuildNsg-0' provisioning status is running
+VERBOSE: 9:53:53 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-1' provisioning status is running
+VERBOSE: 9:53:53 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:54:00 PM - Resource Microsoft.Resources/deployments 'BuildNsg-1' provisioning status is succeeded
+VERBOSE: 9:54:00 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-0-BuildSubnets' provisioning status is running
+VERBOSE: 9:54:00 PM - Resource Microsoft.Resources/deployments 'BuildNsg-0' provisioning status is succeeded
+VERBOSE: 9:54:00 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-1-BuildSubnets' provisioning status is running
+VERBOSE: 9:54:00 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:54:07 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-0-BuildSubnets' provisioning status is succeeded
+VERBOSE: 9:54:07 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-1-BuildSubnets' provisioning status is succeeded
+VERBOSE: 9:54:07 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:54:14 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-1' provisioning status is succeeded
+VERBOSE: 9:54:14 PM - Checking deployment status in 5 seconds
+VERBOSE: 9:54:21 PM - Resource Microsoft.Resources/deployments 'BuildVirtualNetwork-0' provisioning status is succeeded
+
+
+DeploymentName          : testing
+ResourceGroupName       : TESTING-RG
+ProvisioningState       : Succeeded
+Timestamp               : 4/26/2018 2:54:19 AM
+Mode                    : Incremental
+TemplateLink            :
+Parameters              :
+                          Name             Type                       Value
+                          ===============  =========================  ==========
+                          environment      Object                     {
+                            "name": "Production",
+                            "account": "",
+                            "csp": false,
+                            "ea": false,
+                            "device": "",
+                            "ticket": "",
+                            "region": "East US",
+                            "subscriptionId": "f2567e29-dd77-4151-9b7b-4127e1f902c7",
+                            "tenantId": "996a48a4-2989-4fd3-a56a-44e9d6ca62b3",
+                            "virtualNetwork": [
+                              {
+                                "name": "eus-vnet01",
+                                "ResourceGroup": "eus-vnet",
+                                "addressPrefix": "10.100.0.0/21",
+                                "subnets": [
+                                  {
+                                    "name": "eus-vnet01-dmz",
+                                    "addressPrefix": "10.100.0.0/27",
+                                    "nsg": "eus-vnet01-dmz-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet01-app",
+                                    "addressPrefix": "10.100.0.32/27",
+                                    "nsg": "eus-vnet01-app-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet01-ins",
+                                    "addressPrefix": "10.100.0.64/27",
+                                    "nsg": "eus-vnet01-ins-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet01-ad",
+                                    "addressPrefix": "10.100.0.96/27",
+                                    "nsg": "eus-vnet01-ad-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet01-bas",
+                                    "addressPrefix": "10.100.0.128/27",
+                                    "nsg": "eus-vnet01-bas-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet01-agw",
+                                    "addressPrefix": "10.100.0.160/27",
+                                    "nsg": "eus-vnet01-agw-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  },
+                                  {
+                                    "name": "GatewaySubnet",
+                                    "addressPrefix": "10.100.0.192/27",
+                                    "nsg": "GatewaySubnet-nsg",
+                                    "bastion": "10.100.0.128/27"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "eus-vnet02",
+                                "ResourceGroup": "eus-vnet",
+                                "addressPrefix": "10.101.0.0/21",
+                                "subnets": [
+                                  {
+                                    "name": "eus-vnet02-dmz",
+                                    "addressPrefix": "10.101.0.0/27",
+                                    "nsg": "eus-vnet02-dmz-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet02-app",
+                                    "addressPrefix": "10.101.0.32/27",
+                                    "nsg": "eus-vnet02-app-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet02-ins",
+                                    "addressPrefix": "10.101.0.64/27",
+                                    "nsg": "eus-vnet02-ins-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet02-ad",
+                                    "addressPrefix": "10.101.0.96/27",
+                                    "nsg": "eus-vnet02-ad-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet02-bas",
+                                    "addressPrefix": "10.101.0.128/27",
+                                    "nsg": "eus-vnet02-bas-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "eus-vnet02-agw",
+                                    "addressPrefix": "10.101.0.160/27",
+                                    "nsg": "eus-vnet02-agw-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  },
+                                  {
+                                    "name": "GatewaySubnet",
+                                    "addressPrefix": "10.101.0.192/27",
+                                    "nsg": "GatewaySubnet-nsg",
+                                    "bastion": "10.101.0.128/27"
+                                  }
+                                ]
+                              }
+                            ],
+                            "virtualMachines": [
+                              {
+                                "name": "x-win-jump-01",
+                                "operatingSystem": "Windows Server 2016",
+                                "vmSize": "A1_v2",
+                                "availabilitySet": "x-win-jump-avset",
+                                "ResourceGroup": "eus-jump",
+                                "subnet": "eus-vnet01-bas",
+                                "dataDisks": []
+                              },
+                              {
+                                "name": "x-win-jump-02",
+                                "operatingSystem": "Windows Server 2016",
+                                "vmSize": "A1_v2",
+                                "availabilitySet": "x-win-jump-avset",
+                                "ResourceGroup": "eus-jump",
+                                "subnet": "eus-vnet01-bas",
+                                "dataDisks": []
+                              },
+                              {
+                                "name": "x-win-jump-03",
+                                "operatingSystem": "Windows Server 2016",
+                                "vmSize": "A1_v2",
+                                "availabilitySet": "x-win-jump-avset",
+                                "ResourceGroup": "eus-jump",
+                                "subnet": "eus-vnet01-bas",
+                                "dataDisks": []
+                              },
+                              {
+                                "name": "x-win-ad-01",
+                                "operatingSystem": "Windows Server 2016",
+                                "vmSize": "DS1_v2",
+                                "availabilitySet": "x-win-ad-avset",
+                                "ResourceGroup": "eus-ad",
+                                "subnet": "eus-vnet01-ad",
+                                "dataDisks": [
+                                  {
+                                    "name": "x-win-ad-01-logs.vhd",
+                                    "lun": 0,
+                                    "sizeInGB": 32,
+                                    "sku": "Premium_LRS"
+                                  },
+                                  {
+                                    "name": "x-win-ad-01-syslog.vhd",
+                                    "lun": 1,
+                                    "sizeInGB": 32,
+                                    "sku": "Premium_LRS"
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "x-win-ad-02",
+                                "operatingSystem": "Windows Server 2016",
+                                "vmSize": "DS1_v2",
+                                "availabilitySet": "x-win-ad-avset",
+                                "ResourceGroup": "eus-ad",
+                                "subnet": "eus-vnet01-ad",
+                                "dataDisks": [
+                                  {
+                                    "name": "x-win-ad-02-logs.vhd",
+                                    "lun": 0,
+                                    "sizeInGB": 32,
+                                    "sku": "Premium_LRS"
+                                  },
+                                  {
+                                    "name": "x-win-ad-02-syslog.vhd",
+                                    "lun": 1,
+                                    "sizeInGB": 32,
+                                    "sku": "Premium_LRS"
+                                  }
+                                ]
+                              }
+                            ],
+                            "AzureSQL": [
+                              {
+                                "serverName": "sql-01",
+                                "ResourceGroup": "eus-sql",
+                                "elasticPool": [
+                                  {
+                                    "name": "sql-01-ep",
+                                    "pool": {
+                                      "dataSize": 1200,
+                                      "dtu": 1
+                                    }
+                                  }
+                                ],
+                                "database": [
+                                  {
+                                    "name": "db1",
+                                    "elasticPoolName": "sql-01-ep",
+                                    "GeoReplication": {
+                                      "enabled": true,
+                                      "region": "WestUS"
+                                    }
+                                  },
+                                  {
+                                    "name": "db2",
+                                    "elasticPoolName": "sql-01-ep",
+                                    "GeoReplication": {
+                                      "enabled": true,
+                                      "region": "WestUS"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+
+Outputs                 :
+                          Name             Type                       Value
+                          ===============  =========================  ==========
+                          armTemplate      Object                     {
+                            "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                            "contentVersion": "1.0.0.0",
+                            "parameters": {},
+                            "variables": {
+                              "name": "Production",
+                              "account": "",
+                              "csp": false,
+                              "ea": false,
+                              "device": "",
+                              "ticket": "",
+                              "region": "East US",
+                              "subscriptionId": "f2567e29-dd77-4151-9b7b-4127e1f902c7",
+                              "tenantId": "996a48a4-2989-4fd3-a56a-44e9d6ca62b3"
+                            },
+                            "resources": [
+                              [
+                                {
+                                  "name": "eus-vnet01-dmz-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.0/27",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet01-app-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.32/27",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet01-ins-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.64/27",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet01-ad-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.96/27",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet01-bas-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet01-agw-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.160/27",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "GatewaySubnet-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.100.0.192/27",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.100.0.128/27",
+                                          "destinationAddressPrefix": "10.100.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              [
+                                {
+                                  "name": "eus-vnet02-dmz-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.0/27",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.0/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet02-app-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.32/27",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.32/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet02-ins-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.64/27",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.64/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet02-ad-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.96/27",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.96/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet02-bas-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.128/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "eus-vnet02-agw-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.160/27",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.160/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "name": "GatewaySubnet-nsg",
+                                  "type": "Microsoft.Network/networkSecurityGroups",
+                                  "location": "eastus2",
+                                  "apiVersion": "2015-05-01-preview",
+                                  "properties": {
+                                    "securityRules": [
+                                      {
+                                        "name": "Allow_LOCAL_SUBNET_INBOUND",
+                                        "properties": {
+                                          "description": "Allows intra-subnet communication",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "10.101.0.192/27",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 110,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_AZURE_LB_INBOUND",
+                                        "properties": {
+                                          "description": "Allows inbound traffic from Azure Load Balancer",
+                                          "protocol": "*",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "AzureLoadBalancer",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 111,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_RDP_INBOUND",
+                                        "properties": {
+                                          "description": "Allows RDP inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "3389",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 112,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SSH_INBOUND",
+                                        "properties": {
+                                          "description": "Allows SSH inbound from local RBAST subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "22",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 113,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_WinRM_INBOUND",
+                                        "properties": {
+                                          "description": "Allows WinRM inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "5986",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 114,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Allow_RACK_BASTION_SFTBROKER_INBOUND",
+                                        "properties": {
+                                          "description": "Allows ScaleFT Broker agent inbound from local RACK_BASTION subnet",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "4421",
+                                          "sourceAddressPrefix": "10.101.0.128/27",
+                                          "destinationAddressPrefix": "10.101.0.192/27",
+                                          "access": "Allow",
+                                          "priority": 115,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_UDP",
+                                        "properties": {
+                                          "description": "Deny all inbound UDP",
+                                          "protocol": "Udp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4000,
+                                          "direction": "Inbound"
+                                        }
+                                      },
+                                      {
+                                        "name": "Deny_ALL_INBOUND_TCP",
+                                        "properties": {
+                                          "description": "Deny all inbound TCP",
+                                          "protocol": "Tcp",
+                                          "sourcePortRange": "*",
+                                          "destinationPortRange": "*",
+                                          "sourceAddressPrefix": "*",
+                                          "destinationAddressPrefix": "*",
+                                          "access": "Deny",
+                                          "priority": 4001,
+                                          "direction": "Inbound"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                }
+                              ],
+                              {
+                                "name": "eus-vnet01",
+                                "type": "Microsoft.Network/virtualNetworks",
+                                "location": "eastus2",
+                                "apiVersion": "2017-09-01",
+                                "properties": {
+                                  "addressSpace": {
+                                    "addressPrefixes": [
+                                      "10.100.0.0/21"
+                                    ]
+                                  },
+                                  "dhcpOptions": {
+                                    "dnsServers": null
+                                  }
+                                },
+                                "subnets": [
+                                  {
+                                    "name": "eus-vnet01-dmz",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.0/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-dmz-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet01-app",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.32/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-app-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet01-ins",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.64/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-ins-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet01-ad",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.96/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-ad-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet01-bas",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.128/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-bas-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet01-agw",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.160/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet01-agw-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "GatewaySubnet",
+                                    "properties": {
+                                      "addressprefix": "10.100.0.192/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/GatewaySubnet-nsg"
+                                      }
+                                    }
+                                  }
+                                ]
+                              },
+                              {
+                                "name": "eus-vnet02",
+                                "type": "Microsoft.Network/virtualNetworks",
+                                "location": "eastus2",
+                                "apiVersion": "2017-09-01",
+                                "properties": {
+                                  "addressSpace": {
+                                    "addressPrefixes": [
+                                      "10.101.0.0/21"
+                                    ]
+                                  },
+                                  "dhcpOptions": {
+                                    "dnsServers": null
+                                  }
+                                },
+                                "subnets": [
+                                  {
+                                    "name": "eus-vnet02-dmz",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.0/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-dmz-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet02-app",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.32/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-app-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet02-ins",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.64/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-ins-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet02-ad",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.96/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-ad-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet02-bas",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.128/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-bas-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "eus-vnet02-agw",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.160/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/eus-vnet02-agw-nsg"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "name": "GatewaySubnet",
+                                    "properties": {
+                                      "addressprefix": "10.101.0.192/27",
+                                      "networkSecurityGroup": {
+                                        "id": "/subscriptions/f2567e29-dd77-4151-9b7b-4127e1f902c7/resourceGroups/eus-vnet/providers/Microsoft.Network/networkSecurityGroups/GatewaySubnet-nsg"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ],
+                            "outputs": {}
+                          }
+
+DeploymentDebugLogLevel :
